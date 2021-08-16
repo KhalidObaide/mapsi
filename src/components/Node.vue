@@ -1,6 +1,6 @@
 <template>
 
-    <div :class="(!nodeType) ? 'node' : (nodeType == 'wall') ? 'node wall' : 'node'"
+    <div :class="className"
     v-on:mousedown="startBuilding"
     v-on:mouseover="build"
     v-on:click="build(false)"
@@ -12,33 +12,15 @@
 export default{
     name: "Node",
     props:{
-        isBuilding: {required: false, type: Boolean, default:false},
-        destroyActive: {required: false, type: Boolean, default:false}
+        x: { requried: true, type: Number},
+        y: { requried: true, type: Number},
+        className: {requried: false, type: String, default:"node"}
     },
-
-    data(){return{
-        nodeType: null, /* No value for simple/empty node */
-    }},
 
     methods: {
         startBuilding(){this.$emit("startBuilding");},
         stopBuilding(){this.$emit("stopBuilding");},
-
-        build(checkForBuilder=true){
-            if(checkForBuilder){
-                if(this.destroyActive){
-                    this.nodeType = null;
-                }else if(this.isBuilding){
-                    this.nodeType = "wall";
-                }
-            }else{
-                if(this.destroyActive){
-                    this.nodeType = null;
-                }else{this.nodeType = "wall";}
-            }
-        }, /* End of build Function */
-
-
+        build(checkForBuilder=true){this.$emit("build", {x:this.x, y:this.y, checkForBuilder:checkForBuilder})}
     }
 }
 </script>

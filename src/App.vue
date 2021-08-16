@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1>Mapsi - Visualize a taxi path finding on a city map</h1>
+        <h1>Mapsi, Path finding visualizer</h1>
         <Map/>
     </div>
 </template>
@@ -42,10 +42,12 @@ export default {
     cursor: cell;
 }
 .node:hover{
-    background-color: gray;
+    background-color: aqua;
 }
 
-.node.wall{
-    background-color: gray;
-}
+.node.wall{background-color: gray;}
+.node.start{background-color: blue;}
+.node.end{background-color: red;}
+.node.path{background-color: yellow;}
+
 </style>

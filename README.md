@@ -22,3 +22,8 @@ npm run build
 npm run lint
 ```
 
+
+## TODO:
+1. Add starting and ending node placements
+2. Keep track of the nodes
+3. Path finding Alg
