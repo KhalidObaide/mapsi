@@ -43,7 +43,5 @@ npm run lint
 
 
 ## TODO & Contribute:
-
-1. Deploy the built project somewhere online
-2. Debugging the A\* Algo
-3. Add more path-finding Algos
+1. Debugging the A\* Algo
+2. Add more path-finding Algos
