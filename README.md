@@ -1,24 +1,24 @@
 # mapsi
+(Map-Tax) Taxi path finding on a city map visualizer.
 
-## Project setup
-```
+
+## Project Setup
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+#### Compiles and hot-reloads for development
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+#### Compiles and minifies for production
+```bash
 npm run build
 ```
 
-### Lints and fixes files
-```
+#### Lints and fixes files
+```bash
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
