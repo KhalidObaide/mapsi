@@ -95,14 +95,22 @@ export default{
             /* Initialize the AStar */
             const aStar = new AStar();
             aStar.setNodes(this.nodes);
-            aStar.setWalls(this.nodes.filter(n=> n.className == "node wall"));
-            aStar.setStart(this.nodes.find(n=> n.className == "node start"));
-            aStar.setEnd(this.nodes.find(n=> n.className == "node end"));
+            aStar.setWalls(this.nodes.filter(n=> n.className == "node wall").map(n=>this.nodes.indexOf(n)));
+            aStar.setStart(this.nodes.indexOf(this.nodes.find(n=> n.className == "node start")));
+            aStar.setEnd(this.nodes.indexOf(this.nodes.find(n=> n.className == "node end")));
 
             /* Getting & Colorize the result */
             try{
-                const path = aStar.findPath();
-                path.forEach(n => {this.nodes[n].className = "node path"});
+                let path = aStar.findPath();
+                let i = 0;
+                while(path){
+                    let idx = path.idx;
+                    setTimeout(()=>{
+                        this.nodes[idx].className = "node path";
+                    }, i*100);
+                    path = path.parentNode;
+                    i++;
+                }
             }catch(e){
                 if(e.toString() == "Error: Either start/end node is null or nodes contains less then 2 elements"){
                     alert("Please place a start & end node");
@@ -112,13 +120,11 @@ export default{
                 }
             }
 
-
         }, /* end of visualize function */
 
     }
 }
 </script>
-
 
 <style scoped>
 .map{

@@ -1,6 +1,6 @@
 <template>
 
-    <div :class="className"
+    <div :class="className" :id="'N'+x.toString()+'-'+y.toString()"
     v-on:mousedown="startBuilding"
     v-on:mouseover="build"
     v-on:click="build(false)"

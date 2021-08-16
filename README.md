@@ -1,6 +1,5 @@
 # mapsi
-(Map-Tax) Taxi path finding on a city map visualizer.
-
+A path finding Visualizer made in Vue.js
 
 ## Project Setup
 ```bash
@@ -24,6 +23,12 @@ npm run lint
 
 
 ## TODO:
-1. Add starting and ending node placements
-2. Keep track of the nodes
-3. Path finding Alg
+1. Add a help button with a modal
+2. Add Css Animations for placement & for the path finder
+3. Add auto-generate wall Option
+4. Ability to reset the board without removing the walls
+5. Deploy the built project somewhere online
+6. Debugging the A\* Algo
+7. Add more path-finding Algos
+
+
