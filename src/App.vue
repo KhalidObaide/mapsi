@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1>Mapsi, Path finding visualizer</h1>
+        <h1>Mapsi, Map Generator and Path Finding visualizer</h1>
         <Map/>
     </div>
 </template>

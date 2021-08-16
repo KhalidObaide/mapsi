@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-content">
                     <ul>
-                        <li>Press `w` to switch building to wall</li>
+                        <li>Press `w` to enable building walls & Click on any tile to place walls</li>
                         <li>Press `s` to be able to place Starting Point</li>
                         <li>Press `e` to be able to place Ending Point</li>
                     </ul>
@@ -22,6 +22,7 @@
             <button class="btn action" v-on:click="visualize">Visualize</button>
             <button class="btn generate" v-on:click='generateRandomMap("city")'>City Mode</button>
             <button class="btn generate" v-on:click='generateRandomMap("desert")'>Desert Mode</button>
+            <button class="btn generate" v-on:click='generateRandomMap("cave")'>Cave Mode</button>
             <button class="btn generate" v-on:click='generateRandomMap("random")'>Random Map</button>
             <button class="btn primary" v-on:click="help">Help?</button>
         </div>
@@ -110,6 +111,9 @@ export default{
             }else if(mode=="city"){
                 mapGenerator.maxTunnels = 50;
                 mapGenerator.maxLength = 40;
+            }else if(mode=="cave"){
+                mapGenerator.maxTunnels = 420;
+                mapGenerator.maxLength = 1;
             }else{
                 mapGenerator.maxTunnels = Math.floor(Math.random()*400);
                 mapGenerator.maxLength = Math.floor(Math.random()*28);

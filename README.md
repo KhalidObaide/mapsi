@@ -1,6 +1,23 @@
 # mapsi
 A map Generator and path finding Visualizer made in Vue.js
 
+A Demo of this can be found on [My Personal Github Page](https://khalidobaide.github.io/projects/mapsi/)
+
+
+
+### Table of Contents
+
+[TOC]
+
+
+
+### Algos
+
+1. The main path-finding algo is A* by default
+2. For generating the maps  `procedural dungeon map generator using the Random Walk Algorithm`
+
+
+
 ## Project Setup
 ```bash
 npm install
@@ -22,7 +39,11 @@ npm run lint
 ```
 
 
-## TODO & Contributes:
+
+
+
+## TODO & Contribute:
+
 1. Deploy the built project somewhere online
 2. Debugging the A\* Algo
 3. Add more path-finding Algos
