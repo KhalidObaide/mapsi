@@ -39,6 +39,7 @@ class AStar{
         const ln = this.nodes.find(n=> n.x == nNode.x-1 && n.y == nNode.y);
         if(ln){neighbours.push(this.findCosts(this.nodes.indexOf(ln)))}
 
+        /* // For Diagnal movement
         const trn = this.nodes.find(n=> n.x == nNode.x+1 && n.y == nNode.y-1);
         if(trn){neighbours.push(this.findCosts(this.nodes.indexOf(trn)))}
 
@@ -50,6 +51,7 @@ class AStar{
 
         const bln = this.nodes.find(n=> n.x == nNode.x-1 && n.y == nNode.y+1);
         if(bln){neighbours.push(this.findCosts(this.nodes.indexOf(bln)))}
+        */
 
         return neighbours;
     };

@@ -1,9 +1,31 @@
 <template>
     <div class="map">
+
+        <div class="modal-wrapper" v-if="this.modalDisplay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h4>Help Menu</h4>
+                    <img src="../assets/cross.svg" v-on:click="()=>{modalDisplay = false}"/>
+                </div>
+                <div class="modal-content">
+                    <ul>
+                        <li>Press `w` to switch building to wall</li>
+                        <li>Press `s` to be able to place Starting Point</li>
+                        <li>Press `e` to be able to place Ending Point</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div style="display: flex; column-gap: 10px;">
             <button class="btn reset" v-on:click="resetGrid">Reset Map</button>
             <button class="btn action" v-on:click="visualize">Visualize</button>
+            <button class="btn generate" v-on:click='generateRandomMap("city")'>City Mode</button>
+            <button class="btn generate" v-on:click='generateRandomMap("desert")'>Desert Mode</button>
+            <button class="btn generate" v-on:click='generateRandomMap("random")'>Random Map</button>
+            <button class="btn primary" v-on:click="help">Help?</button>
         </div>
+
         <div class="node-container">
             <Node
             v-for="node in nodes"
@@ -15,12 +37,14 @@
             @build="build"
             @stopBuilding="stopBuilding"/>
         </div>
+
     </div>
 </template>
 
 <script>
 import Node from '@/components/Node.vue';
 import AStar from '@/algs/AStar.js';
+import MapGenerator from '@/algs/MapGenerator.js';
 
 export default{
     name: "Map",
@@ -29,11 +53,15 @@ export default{
     },
 
     data(){return{
+        modalDisplay: false,
+
+        mapWidth: 40,
+        mapHeight: 30,
+
         nodes: [],
         isBuilding: false,
         destroyActive: false,
         buildingType: 'wall', /* wall, start, end */
-
     }},
 
     created(){
@@ -58,14 +86,49 @@ export default{
 
     methods:{
         generateNodes(){
-            for(let y=0; y<30; y++){
-                for(let x=0; x<40; x++){
+            for(let y=0; y<this.mapHeight; y++){
+                for(let x=0; x<this.mapWidth; x++){
                     this.nodes.push({
                         x:x, y:y,
                         className: "node"
                     });
                 }
             }
+        },
+
+
+        generateRandomMap(mode="city"){
+            /* Initialize the map */
+            const mapGenerator = new MapGenerator();
+            mapGenerator.xdimensions = this.mapWidth;
+            mapGenerator.ydimensions = this.mapHeight;
+
+            /* Set the map generate mode */
+            if(mode=="desert"){
+                mapGenerator.maxTunnels = 600;
+                mapGenerator.maxLength = 8;
+            }else if(mode=="city"){
+                mapGenerator.maxTunnels = 50;
+                mapGenerator.maxLength = 40;
+            }else{
+                mapGenerator.maxTunnels = Math.floor(Math.random()*400);
+                mapGenerator.maxLength = Math.floor(Math.random()*28);
+            }
+
+            /* Generate the map */
+            const map = mapGenerator.createMap();
+            this.resetGrid();
+            for(let y=0; y<map.length; y++){
+                setTimeout(()=>{
+                    for(let x=0; x<map[y].length; x++){
+                        const node = this.nodes.find(n => n.x == x && n.y == y);
+                        if(map[y][x]){
+                            node.className = "node wall";
+                        }
+                    }
+                }, y*50);
+            }
+
         },
 
         startBuilding(){this.isBuilding = true;},
@@ -84,6 +147,11 @@ export default{
                     node.className = 'node';
                 }
             }
+        },
+
+
+        help(){
+            this.modalDisplay = true;
         },
 
         resetGrid(){
@@ -107,7 +175,7 @@ export default{
                     let idx = path.idx;
                     setTimeout(()=>{
                         this.nodes[idx].className = "node path";
-                    }, i*100);
+                    }, i*50);
                     path = path.parentNode;
                     i++;
                 }
@@ -167,4 +235,58 @@ export default{
     background-color: lightgreen;
     color: green;
 }
+
+.map .btn.primary{
+    border: 1px solid lightblue;
+    background-color: lightblue;
+    color: blue;
+}
+
+.map .btn.generate{
+    border: 1px solid orange;
+    background-color: orange;
+    color: white;
+}
+
+
+
+.modal-wrapper{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.modal{
+    min-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px gray;
+}
+
+.modal .modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    padding-bottom: 15px;
+}
+.modal .modal-header img{
+    height: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.modal .modal-header img:hover{
+    transform: rotate(360deg);
+}
+
+.modal .modal-content{
+    padding: 20px;
+}
+
 </style>

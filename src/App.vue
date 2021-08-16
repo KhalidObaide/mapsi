@@ -40,12 +40,13 @@ export default {
     width: 20px;
     height: 20px;
     cursor: cell;
+    transition: all .5s ease-out;
 }
 .node:hover{
     background-color: aqua;
 }
 
-.node.wall{background-color: gray;}
+.node.wall{background-color: gray; padding: 0px}
 .node.start{background-color: blue;}
 .node.end{background-color: red;}
 .node.path{background-color: yellow;}
