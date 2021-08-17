@@ -5,12 +5,6 @@ A Demo of this can be found on [My Personal Github Page](https://khalidobaide.gi
 
 
 
-### Table of Contents
-
-[TOC]
-
-
-
 ### Algos
 
 1. The main path-finding algo is A* by default
@@ -37,8 +31,6 @@ npm run build
 ```bash
 npm run lint
 ```
-
-
 
 
 
