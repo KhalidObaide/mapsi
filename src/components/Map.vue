@@ -56,7 +56,7 @@ export default{
     data(){return{
         modalDisplay: false,
 
-        mapWidth: 40,
+        mapWidth: 40, /* Make sure to change the node-container grid-column property as well */
         mapHeight: 30,
 
         nodes: [],
@@ -209,8 +209,8 @@ export default{
     user-select: none;
 }
 .node-container{
-    display: flex;
-    flex-wrap : wrap;
+    display: grid;
+    grid-template-columns: repeat(40, 20px);
     width: 802px; /* 2 px for the border */
     border: 1px solid gray;
     border-radius: 5px;
